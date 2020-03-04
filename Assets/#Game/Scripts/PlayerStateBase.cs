@@ -6,18 +6,18 @@ public enum ePlayerStateType
 {
     Move,
     Grab,
-    Punch,
-    Choke,
-    Dead
+    Punch
 }
 
 public abstract class PlayerStateBase
 {
     protected SpriteRenderer spriteRenderer = null;
+    protected Sprite[] sprites = null;
 
-    public PlayerStateBase(SpriteRenderer spriteRenderer)
+    public PlayerStateBase(SpriteRenderer spriteRenderer, Sprite []sprites)
     {
         this.spriteRenderer = spriteRenderer;
+        this.sprites = sprites;
     }
 
     public abstract void OnEnableState();

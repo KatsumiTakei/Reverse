@@ -5,13 +5,18 @@ public class GradientSprite : MonoBehaviour
     Material material = null;
 
     [SerializeField]
-    float rank1 = 0f;
+    float runk1 = 0f;
 
     [SerializeField]
-    float rank2 = 0f;
+    float runk2 = 0f;
 
-    string rank1Str = "_Rank1";
-    string rank2Str = "_Rank2";
+    readonly string runk1Str = "_Runk1";
+    readonly string runk2Str = "_Runk2";
+
+    readonly string alphaStr = "_Alpha";
+
+    float alphaGradientSecond = -1f;
+    float alphaGradientCnt = 0f;
 
     void Start()
     {
@@ -22,27 +27,46 @@ public class GradientSprite : MonoBehaviour
 
     void Update()
     {
-        if (rank1 < 1f)
+        if (runk1 < 1f)
         {
-            rank1 += Time.deltaTime;
-            material.SetFloat(rank1Str, rank1);
+            runk1 += Time.deltaTime;
+            material.SetFloat(runk1Str, runk1);
         }
         else
         {
-            rank2 += Time.deltaTime;
-            material.SetFloat(rank2Str, rank2);
+            runk2 += Time.deltaTime;
+            material.SetFloat(runk2Str, runk2);
+        }
+
+        if(alphaGradientSecond > 0f)
+        {
+            alphaGradientCnt += Time.deltaTime;
+            material.SetFloat(alphaStr, Mathf.Lerp(1f, 0f, alphaGradientCnt / alphaGradientSecond));
         }
 
     }
 
-    void Reset()
+    public void Reset()
     {
-        rank1 = 0f;
-        rank2 = 0f;
+        runk1 = 0f;
+        runk2 = 0f;
+        alphaGradientSecond = -1;
 
-        material.SetFloat(rank1Str, rank1);
-        material.SetFloat(rank2Str, rank2);
+        material.SetFloat(runk1Str, runk1);
+        material.SetFloat(runk2Str, runk2);
+        material.SetFloat(alphaStr, 1f);
 
+    }
+
+    public bool IsFinishGradient()
+    {
+        return (runk2 >= 1f);
+    }
+
+    public void SetAlphaGradient(float second)
+    {
+        Debug.Assert(second > 0f, "invalid value...");
+        alphaGradientSecond = second;
     }
 
 }

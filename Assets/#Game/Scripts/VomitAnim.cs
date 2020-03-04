@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class VomitAnim : MonoBehaviour
 {
-
     Material material = null;
-
 
     void Start()
     {
         material = GetComponent<Renderer>().material;
+        material.SetFloat("_DegOFfset", 0f);
     }
 
     void Update()

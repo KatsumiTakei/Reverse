@@ -7,12 +7,14 @@
 
 			_Runk1("Runk1", Range(0, 1)) = 0
 			_Runk2("Runk2", Range(0, 1)) = 0
+			_Alpha("Alpha", Range(0, 1)) = 1
 
 	}
 	SubShader
 	{
 		Tags { "Queue" = "Transparent" "RenderType"="Transparent" }
 		LOD 100
+		Cull Off
 
 		Pass
 		{
@@ -42,6 +44,7 @@
 			float4 _MainTex_ST;
 			float _Runk1;
 			float _Runk2;
+			float _Alpha;
 
 			v2f vert (appdata v)
 			{
@@ -57,7 +60,7 @@
 				fixed4 ref = tex2D(_MainTex, i.uv);
 				fixed4 palette = tex2D(_PaletteTex, float2(floor(_Runk1 + i.uv.y), floor(_Runk2 + i.uv.y)) );
 
-				return fixed4(palette.r, palette.g, palette.b, ref.a);
+				return fixed4(palette.r, palette.g, palette.b, ref.a * _Alpha);
 			}
 			ENDCG
 		}

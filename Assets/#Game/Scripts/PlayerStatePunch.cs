@@ -4,19 +4,28 @@ using UnityEngine;
 
 public class PlayerStatePunch : PlayerStateBase
 {
-    public PlayerStatePunch(SpriteRenderer spriteRenderer) : base(spriteRenderer)
+    int freazeCnt = 0;
+    const int FreazeLimit = 60;
+
+    public PlayerStatePunch(SpriteRenderer spriteRenderer, Sprite[] sprites) : base(spriteRenderer, sprites)
     {
     }
 
     public override void Update()
     {
+        if (freazeCnt++ >= FreazeLimit)
+            EventManager.BroadcastChangePlayerState(ePlayerStateType.Move);
+    }
+
+    public override void OnEnableState()
+    {
+        spriteRenderer.sprite = sprites[0];
+        freazeCnt = 0;
+
     }
 
     public override void OnDisableState()
     {
     }
 
-    public override void OnEnableState()
-    {
-    }
 }

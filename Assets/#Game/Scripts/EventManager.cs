@@ -13,13 +13,41 @@ public static class EventManager
     }
     #endregion  OnMultipleInput
 
-    #region     OnPlayerMove
-    public static event Action<Vector2> OnPlayerMove = null;
-    public static void BroadcastPlayerMove(Vector2 moveValue)
+    #region     OnChangePlayerState
+    public static event Action<ePlayerStateType> OnChangePlayerState = null;
+    public static void BroadcastChangePlayerState(ePlayerStateType playerStateType)
     {
-        OnPlayerMove?.Invoke(moveValue);
+        OnChangePlayerState?.Invoke(playerStateType);
     }
-    #endregion  OnPlayerMove
+    #endregion  OnChangePlayerState
+    
+    #region     OnChangeMobState
+    public static event Action<eMobStateType, int> OnChangeMobState = null;
+    public static void BroadcastChangeMobState(eMobStateType mobStateType, int instanceId)
+    {
+        OnChangeMobState?.Invoke(mobStateType, instanceId);
+    }
+    #endregion  OnChangeMobState
+
+
+    #region     OnAddAttackedList
+    public static event Action<int> OnAddAttackedList = null;
+    public static void BroadcastAddAttackList(int instanceId)
+    {
+        OnAddAttackedList?.Invoke(instanceId);
+    }
+    #endregion  OnAddAttackedList
+    
+
+    #region     OnRemoveAttackedList
+    public static event Action<int> OnRemoveAttackedList = null;
+    public static void BroadcastRemoveAttackedList(int instanceId)
+    {
+        OnRemoveAttackedList?.Invoke(instanceId);
+    }
+    #endregion  OnRemoveAttackedList
+
+
 
 }
 
