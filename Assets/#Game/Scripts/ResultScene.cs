@@ -5,16 +5,16 @@ using UnityEngine;
 public class ResultScene : SceneBase
     , IInputResponder
 {
+
     private void OnEnable()
     {
-        EventManager.OnMultipleInput += OnMultipleInput;
+        print("OnEnable ResultScene");
         naichilab.RankingLoader.Instance.SendScoreAndShowRanking(ProgressManager.Instance.GetReleaseCnt());
-
     }
 
     private void OnDisable()
     {
-        EventManager.OnMultipleInput -= OnMultipleInput;
+        print("OnDisable ResultScene");
     }
 
 

@@ -236,6 +236,7 @@ namespace naichilab
 
         public void OnCloseButtonClick()
         {
+            ProgressManager.Instance.MoveScene(eSceneState.Title);
             closeButton.interactable = false;
             UnityEngine.SceneManagement.SceneManager.UnloadSceneAsync("Ranking");
         }
@@ -248,5 +249,11 @@ namespace naichilab
             m.enabled = false;
             m.enabled = true;
         }
+
+        public void Tweet()
+        {
+            StartCoroutine(TweetWithScreenShot.TweetManager.TweetWithScreenShot($"Reverse Motiでいい感じの得点！"));
+        }
+
     }
 }

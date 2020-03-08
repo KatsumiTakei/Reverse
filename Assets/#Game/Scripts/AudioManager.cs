@@ -50,7 +50,9 @@ public class AudioManager : SingletonMonoBehaviour<AudioManager>
 
         RuntimeInitializeOnLoadMethod();
         //  R/W Json
-        audioData = JsonManager.FromJson<AudioData>(nameof(AudioData));
+        audioData = new AudioData();
+        audioData.VolumeBGM = 1f;
+        audioData.VolumeSE = 1f;
 
         // Getting audio source and setting to each variable, then setting that volume
         AudioSource[] audioSourceArray = GetComponents<AudioSource>();

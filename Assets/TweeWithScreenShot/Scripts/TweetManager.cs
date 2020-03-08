@@ -94,11 +94,5 @@ namespace TweetWithScreenShot
             Application.OpenURL(TweetURL);
 #endif
         }
-
-        public static void StartTweetWithScreenShot(MonoBehaviour monoBehaviour, string text)
-        {
-            monoBehaviour.StartCoroutine(text);
-        }
-
     }
 }

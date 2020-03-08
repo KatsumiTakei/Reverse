@@ -48,6 +48,11 @@ public class ProgressManager : SingletonMonoBehaviour<ProgressManager>
 
     private void Start()
     {
+        currentScene = titleScene;
+        titleScene.gameObject.SetActive(true);
+        playScene.enabled = false;
+        resultScene.gameObject.SetActive(false);
+
         Reset();
     }
 
@@ -69,15 +74,12 @@ public class ProgressManager : SingletonMonoBehaviour<ProgressManager>
 
     public void Reset()
     {
-        currentScene = titleScene;
-        titleScene.gameObject.SetActive(true);
-        playScene.enabled = false;
-        resultScene.gameObject.SetActive(false);
-
         aliveCnt = AliveMax;
         releaseCnt = 0;
         eraseCnt = 0;
         UpdateHUD();
+
+        EventManager.BroadcastResetSpd();
     }
 
     void UpdateHUD()
@@ -109,7 +111,8 @@ public class ProgressManager : SingletonMonoBehaviour<ProgressManager>
     private void Update()
     {
         if(MobManager.Instance.GetRemainingMobs() <= 0 
-            && OnIsCreateLimit())
+            && OnIsCreateLimit()
+            && currentScene != resultScene)
         {
             MoveScene(eSceneState.Result);
         }
@@ -122,6 +125,7 @@ public class ProgressManager : SingletonMonoBehaviour<ProgressManager>
         switch (sceneState)
         {
             case eSceneState.Title:
+                Reset();
                 currentScene = titleScene;
                     break;
             case eSceneState.Play:

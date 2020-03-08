@@ -17,6 +17,7 @@ public class TitleScene : SceneBase
 
     private void OnEnable()
     {
+        print("OnEnable TitleScene");
         EventManager.OnMultipleInput += OnMultipleInput;
 
         spaceRender.sprite = spaceSprites[0];
@@ -25,6 +26,7 @@ public class TitleScene : SceneBase
 
     private void OnDisable()
     {
+        print("OnDisable TitleScene");
         EventManager.OnMultipleInput -= OnMultipleInput;
     }
 

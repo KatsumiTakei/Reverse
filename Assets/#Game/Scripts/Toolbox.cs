@@ -10,7 +10,15 @@ public class Toolbox : MonoBehaviour
 
     private void Start()
     {
-        //AudioManager.PlayBGM();
+        AudioManager.PlayBGM(ResourcesPath.Audio.BGM._battle);
+    }
+
+    IEnumerator CoLateStart()
+    {
+        yield return null;
+        yield return null;
+
+
     }
 
     void Update()

@@ -79,6 +79,14 @@ public static class EventManager
     }
     #endregion  OnDeadMob
 
+    #region     OnResetSpd
+    public static event Action OnResetSpd = null;
+    public static void BroadcastResetSpd()
+    {
+        OnResetSpd?.Invoke();
+    }
+    #endregion  OnDeadMob
+
     #region     OnIsCreateLimit
     public static event Func<bool> OnIsCreateLimit = null;
     public static bool BroadcastIsCreateLimit()

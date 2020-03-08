@@ -51,11 +51,15 @@ public class PlayerStateMove : PlayerStateBase
     public override void OnEnableState()
     {
         EventManager.OnMultipleInput += OnMultipleInput;
+        EventManager.OnDeadMob += OnDeadMob;
+        EventManager.OnResetSpd += OnResetSpd;
     }
 
     public override void OnDisableState()
     {
         EventManager.OnMultipleInput -= OnMultipleInput;
+        EventManager.OnDeadMob -= OnDeadMob;
+        EventManager.OnResetSpd -= OnResetSpd;
     }
 
     public void OnMultipleInput(eInputType inputType, sbyte index, eHIDType hIDType)
@@ -141,5 +145,14 @@ public class PlayerStateMove : PlayerStateBase
         {
             this.moveValue += Vector3.down * spd;
         }
+    }
+
+    void OnDeadMob()
+    {
+        spd += 0.1f;
+    }
+    void OnResetSpd()
+    {
+        spd = 2f;
     }
 }

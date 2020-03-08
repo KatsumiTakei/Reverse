@@ -21,7 +21,7 @@ public class PlayerStatePunch : PlayerStateBase
     {
         spriteRenderer.sprite = sprites[0];
         freazeCnt = 0;
-
+        AudioManager.Instance.PlaySE(ResourcesPath.Audio.SE._BombSe);
     }
 
     public override void OnDisableState()

@@ -10,15 +10,17 @@ public class PlayScene : SceneBase
     MobGenerater[] mobGeneraters = null;
 
     int generaterActiveCnt = 0;
-    const int GeneraterActiveTime = 60 * 8;
+    const int GeneraterActiveTime = 60 * 4;
 
     private void OnEnable()
     {
+        print("OnEnable PlayScene");
         ActiveGenerater();
     }
 
     void OnDisable()
     {
+        print("OnDisable PlayScene");
         for (int i = 0; i < mobGeneraters.Length; i++)
         {
             mobGeneraters[i].enabled = false;
