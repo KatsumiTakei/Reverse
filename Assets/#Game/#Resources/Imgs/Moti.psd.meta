@@ -8,6 +8,12 @@ TextureImporter:
   - first:
       213: 8212155752894821112
     second: Moti_1
+  - first:
+      213: -1631932755885140077
+    second: Moti_2
+  - first:
+      213: 860903380243226236
+    second: Moti_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -130,7 +136,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b9fda648e9e08d14a8fd2918cce8b903
+      spriteID: 88f768c0bfaf08e478ce28a0132cf37e
       internalID: 1929870942559064558
       vertices: []
       indices: 
@@ -151,8 +157,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d843f2ebbf0df8341a955bd99693ed62
+      spriteID: a4a55870eccef9c4f9078d72062d50e5
       internalID: 8212155752894821112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moti_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 79387b8e81a93874f85b04ad22fb010e
+      internalID: -1631932755885140077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Moti_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20119af76359fc740af3a97b2601aa63
+      internalID: 860903380243226236
       vertices: []
       indices: 
       edges: []

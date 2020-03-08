@@ -11,15 +11,20 @@ public class PlayerStateMove : PlayerStateBase
     Transform transform = null;
     Sprite idleSprite = null;
     BoxCollider2D boxCollider2D = null;
+    ContactFilter2D contactFilter = (default);
+
 
     Vector3 moveValue = Vector3.zero;
     readonly Vector3 rightMove = new Vector3(1, 1, 1);
     readonly Vector3 leftMove = new Vector3(-1, 1, 1);
 
-    public PlayerStateMove(Transform transform, Sprite idleSprite, SpriteRenderer spriteRenderer, Sprite[] sprites) : base(spriteRenderer, sprites)
+
+
+    public PlayerStateMove(Transform transform, ContactFilter2D contactFilter, SpriteRenderer spriteRenderer, Sprite[] sprites) : base(spriteRenderer, sprites)
     {
+        this.contactFilter = contactFilter;
         this.transform = transform;
-        this.idleSprite = spriteRenderer.sprite;
+        idleSprite = spriteRenderer.sprite;
 
         boxCollider2D = transform.GetComponent<BoxCollider2D>();
 
@@ -72,18 +77,47 @@ public class PlayerStateMove : PlayerStateBase
             MovePlayer(Vector2.left);
         }
 
-        if (inputType == eInputType.AttackAndDecideKeyDown)
+        var mobCollider = GetNearHitMob();
+        if (mobCollider)
         {
-            if (IsHit())
-                EventManager.BroadcastChangePlayerState(ePlayerStateType.Punch);
+            var mob = mobCollider.gameObject.GetComponent<Mob>();
+            if (mob)
+            {
+                EventManager.BroadcastJudgeAttack(transform.position, mob.transform.position, true);
+                if (inputType == eInputType.AttackAndDecideKeyDown)
+                {
+                    EventManager.BroadcastChangeMobState(eMobStateType.Dead, mob.gameObject.GetInstanceID());
+                    EventManager.BroadcastChangePlayerState(ePlayerStateType.Punch);
+                }
+            }
+        }
+        else
+        {
+            EventManager.BroadcastJudgeAttack(Vector3.zero, Vector3.zero, false);
         }
     }
 
-    bool IsHit()
+    Collider2D GetNearHitMob()
     {
         Collider2D[] results = new Collider2D[5];
-        int hitCount = boxCollider2D.OverlapCollider(new ContactFilter2D(), results);
-        return System.Array.Find(results, element => element.CompareTag(TagName.Mob)) != null;
+        int hitCount = boxCollider2D.OverlapCollider(contactFilter, results);
+        if (hitCount == 0)
+        {
+            //Debug.Log("not found collider");
+            return null;
+        }
+
+        Collider2D mob = System.Array.Find(results, element =>
+        {
+            if (element == null)
+                return false;
+
+            //Debug.Log(element.name + " : " + element?.tag);
+            return element.CompareTag(TagName.Mob);
+        });
+
+        //Debug.Log(mob);
+        return mob;
     }
 
     void MovePlayer(Vector2 moveValue)

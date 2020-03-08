@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerStatePunch : PlayerStateBase
 {
     int freazeCnt = 0;
-    const int FreazeLimit = 60;
+    const int FreazeLimit = 10;
 
     public PlayerStatePunch(SpriteRenderer spriteRenderer, Sprite[] sprites) : base(spriteRenderer, sprites)
     {

@@ -23,6 +23,9 @@ public class MobStateErase : MobStateBase
 
         gradientSprite.SetAlphaGradient(1f);
         MobManager.Instance.Remove(spriteRenderer.gameObject.GetInstanceID());
+
+        EventManager.BroadcastEraseMob();
+
     }
 
     public override void OnDisableState()

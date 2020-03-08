@@ -47,4 +47,6 @@ public enum eInputType
     CanselKeyDown,
     CanselKey,
     CanselKeyUp,
+
+    SpaceKeyDown,
 }

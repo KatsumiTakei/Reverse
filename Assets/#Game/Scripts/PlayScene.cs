@@ -3,50 +3,51 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityDLL;
 
-public class PlayScene : SingletonMonoBehaviour<PlayScene>
+public class PlayScene : SceneBase
 {
+
     [SerializeField]
     MobGenerater[] mobGeneraters = null;
 
     int generaterActiveCnt = 0;
-    const int GeneraterActiveTime = 60 * 10;
-
-    public bool CanAttack { private set; get; } = false;
-
+    const int GeneraterActiveTime = 60 * 8;
 
     private void OnEnable()
-    {
-        //EventManager.OnJudgeAttack += OnJudgeAttack;
-    }
-
-    private void OnDisable()
-    {
-        //EventManager.OnJudgeAttack -= OnJudgeAttack;
-    }
-
-    private void Start()
     {
         ActiveGenerater();
     }
 
+    void OnDisable()
+    {
+        for (int i = 0; i < mobGeneraters.Length; i++)
+        {
+            mobGeneraters[i].enabled = false;
+        }
+    }
+
     void Update()
     {
-        if(generaterActiveCnt++ > GeneraterActiveTime)
+        if (generaterActiveCnt++ > GeneraterActiveTime)
         {
             ActiveGenerater();
             generaterActiveCnt = 0;
         }
     }
 
-    void OnJudgeAttack(Vector3 playerPos, Vector3 mobPos, bool isVisible)
-    {
-        CanAttack = isVisible;
-    }
-
     void ActiveGenerater()
     {
         var sleepGeneraters = System.Array.FindAll(mobGeneraters, generater => !generater.enabled);
-        if(sleepGeneraters.Length > 0)
-            sleepGeneraters[Random.Range(0, sleepGeneraters.Length + 1)].enabled = true;
+        if (sleepGeneraters.Length > 0)
+            sleepGeneraters[Random.Range(0, sleepGeneraters.Length)].enabled = true;
+    }
+
+    public override void Open()
+    {
+        enabled = true;
+    }
+
+    public override void Close()
+    {
+        enabled = false;
     }
 }

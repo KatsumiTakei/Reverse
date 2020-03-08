@@ -16,6 +16,8 @@ public partial class InputManager
         static KeyCode moveUp = KeyCode.UpArrow;
         static KeyCode moveDown = KeyCode.DownArrow;
 
+        static KeyCode space = KeyCode.Space;
+
         #endregion variable
 
         public static sbyte PlayerIndex { get; set; } = 1;//    HACK
@@ -69,6 +71,8 @@ public partial class InputManager
             KeyDown(eInputType.CanselKeyDown, cansel);
             Key(eInputType.CanselKey, cansel);
             KeyUp(eInputType.CanselKeyUp, cansel);
+
+            KeyDown(eInputType.SpaceKeyDown, space);
         }
 
         static void MoveKeys()

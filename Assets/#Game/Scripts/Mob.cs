@@ -20,6 +20,10 @@ public class Mob : MonoBehaviour
     [SerializeField]
     Sprite[] eatSprites = null;
 
+    [SerializeField]
+    SpriteRenderer targetSpriteRender = null;
+
+
     MobStateBase currentState = null;
     MobStateBase[] stateArray = null;
 
@@ -43,10 +47,12 @@ public class Mob : MonoBehaviour
     void Start()
     {
         var sr = GetComponent<SpriteRenderer>();
-        var vomit = GetComponent<VomitAnim>();
+        var vomit = GetComponentInChildren<VomitAnim>();
         vomit.gameObject.SetActive(false);
 
-        target = WayPointManager.Instance.GetRandomDestination();
+        var tapru = WayPointManager.Instance.GetRandomDestination();
+        target = tapru.Item1;
+        targetSpriteRender.sprite = tapru.Item2;
 
         var gradient = GetComponent<GradientSprite>();
         gradient.enabled = false;
@@ -59,7 +65,7 @@ public class Mob : MonoBehaviour
             new MobStateEat(sr, eatSprites, instanceId),
             new MobStateChoke(sr, chokeSprites, gradient, transform, instanceId),
             new MobStateErase(sr, eraseSprites, gradient),
-            new MobStateDead(sr, deadSprites, GetComponent<Collider2D>(), vomit),
+            new MobStateDead(sr, deadSprites, GetComponent<Collider2D>(), vomit, targetSpriteRender),
 
         };
 
@@ -85,11 +91,6 @@ public class Mob : MonoBehaviour
         currentState?.OnDisableState();
         currentState = stateArray[type];
         currentState?.OnEnableState();
-    }
-
-    public bool IsSameTarget(WayPoint wayPoint)
-    {
-        return (wayPoint.Equals(target));
     }
 
 }

@@ -8,14 +8,19 @@ public class WayPointManager : SingletonMonoBehaviour<WayPointManager>
     [SerializeField]
     WayPoint[] wayPoints = null;
 
+    [SerializeField]
+    Sprite[] targetSprites = null;
+
     private void Start()
     {
         Random.InitState((int)Time.time);
     }
 
-    public WayPoint GetRandomDestination()
+    public (WayPoint, Sprite) GetRandomDestination()
     {
-        return wayPoints[Random.Range(0, wayPoints.Length)];
+        int index = Random.Range(0, wayPoints.Length);
+        return (wayPoints[index], targetSprites[index]);
     }
+
 
 }

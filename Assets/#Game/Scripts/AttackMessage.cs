@@ -15,15 +15,15 @@ public class AttackMessage : MonoBehaviour
         refTransform = transform;
     }
 
-    //private void OnEnable()
-    //{
-    //    EventManager.OnJudgeAttack += OnJudgeAttack;
-    //}
+    private void OnEnable()
+    {
+        EventManager.OnJudgeAttack += OnJudgeAttack;
+    }
 
-    //private void OnDisable()
-    //{
-    //    EventManager.OnJudgeAttack -= OnJudgeAttack;
-    //}
+    private void OnDisable()
+    {
+        EventManager.OnJudgeAttack -= OnJudgeAttack;
+    }
 
     void OnJudgeAttack(Vector3 playerPos, Vector3 mobPos, bool isVisible)
     {

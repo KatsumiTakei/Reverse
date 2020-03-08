@@ -29,6 +29,14 @@ public static class EventManager
     }
     #endregion  OnChangeMobState
 
+    #region     OnJudgeAttack
+    public static event Action<Vector3, Vector3, bool> OnJudgeAttack = null;
+    public static void BroadcastJudgeAttack(Vector3 playerPos, Vector3 mobPos, bool isVisible)
+    {
+        OnJudgeAttack?.Invoke(playerPos, mobPos, isVisible);
+    }
+    #endregion  OnJudgeAttack
+
 
     #region     OnAddAttackedList
     public static event Action<int> OnAddAttackedList = null;
@@ -46,6 +54,38 @@ public static class EventManager
         OnRemoveAttackedList?.Invoke(instanceId);
     }
     #endregion  OnRemoveAttackedList
+
+    #region     OnEraseMob
+    public static event Action OnEraseMob = null;
+    public static void BroadcastEraseMob()
+    {
+        OnEraseMob?.Invoke();
+    }
+    #endregion  OnEraseMob
+
+    #region     OnCreateMob
+    public static event Action OnCreateMob = null;
+    public static void BroadcastCreateMob()
+    {
+        OnCreateMob?.Invoke();
+    }
+    #endregion  OnCreateMob
+
+    #region     OnDeadMob
+    public static event Action OnDeadMob = null;
+    public static void BroadcastDeadMob()
+    {
+        OnDeadMob?.Invoke();
+    }
+    #endregion  OnDeadMob
+
+    #region     OnIsCreateLimit
+    public static event Func<bool> OnIsCreateLimit = null;
+    public static bool BroadcastIsCreateLimit()
+    {
+        return OnIsCreateLimit.Invoke();
+    }
+    #endregion  OnIsCreateLimit
 
 
 

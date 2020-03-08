@@ -9,7 +9,7 @@ public class MobGenerater : MonoBehaviour
 
     void Start()
     {
-        generateCnt = -Random.Range(0, 240);
+        generateCnt = 0;
     }
 
     void Update()
@@ -20,10 +20,15 @@ public class MobGenerater : MonoBehaviour
 
     void GenerateMob()
     {
+        if (EventManager.BroadcastIsCreateLimit())
+            return;
+
         var mob = MobManager.Instance.Create();
         mob.transform.position = transform.position;
 
         generateCnt = -Random.Range(120, 240);
+
+        EventManager.BroadcastCreateMob();
     }
 
 }

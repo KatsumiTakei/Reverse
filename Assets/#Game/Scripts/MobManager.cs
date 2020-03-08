@@ -8,7 +8,13 @@ public class MobManager : SingletonMonoBehaviour<MobManager>
     [SerializeField]
     Mob mobPrefab = null;
 
+
     List<Mob> mobs = new List<Mob>();
+
+    public int GetRemainingMobs()
+    {
+        return mobs.Count;
+    }
 
     public Mob Create()
     {
@@ -41,6 +47,9 @@ public class MobManager : SingletonMonoBehaviour<MobManager>
     public void Remove(int instanceId)
     {
         var mob = mobs.Find(element => element.gameObject.GetInstanceID().Equals(instanceId));
+        if (!mob)
+            return;
+
         Destroy(mob.gameObject, 1f);
         mobs.Remove(mob);
     }
